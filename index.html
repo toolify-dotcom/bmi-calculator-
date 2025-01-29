@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <meta name="description" content="Calculate your BMI quickly and easily with our BMI calculator designed for women. Understand your body mass index, track your health goals, and take steps toward a healthier lifestyle today!">
+    <meta name="keywords" content="BMI calculator, BMI calculator for women, Body Mass Index calculator, Women's BMI tool, Calculate BMI, BMI calculator online, Health tracker for women, BMI formula for women, Fitness BMI calculator, BMI chart for women, Weight management tool, BMI tracker for fitness">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+  
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="BMI calculator">
+    <meta property="og:description" content="Calculate your BMI quickly and easily with our BMI calculator designed for women. Understand your body mass index, track your health goals, and take steps toward a healthier lifestyle today!">
+    <meta property="og:url" content="/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Bmi calculator">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BMI calculator">
+    <meta name="twitter:description" content="Calculate your BMI quickly and easily with our BMI calculator designed for women. Understand your body mass index, track your health goals, and take steps toward a healthier lifestyle today!">
+  
+    <!-- Canonical Link -->
+    <link rel="canonical" href="/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="BMI calculator" />
+
+    <!-- Website Schema (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "BMI calculator",
+    "url": "/",
+    "description": "Calculate your BMI quickly and easily with our BMI calculator designed for women. Understand your body mass index, track your health goals, and take steps toward a healthier lifestyle today!",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "/?height={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .section {
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #333;
+            border-color: #444;
+        }
+        .btn-primary:hover {
+            background-color: #444;
+            border-color: #555;
+        }
+    </style>
+</head>
+<body data-bs-theme="dark">
+    <!-- Header -->
+    <nav class="position-sticky top-0 z-2 navbar navbar-expand-md navbar-dark bg-body-secondary">
+        <div class="container">
+            <a class="navbar-brand" href="/">BMI Calculator</a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#calculator">Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#article">Article</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section p-5">
+        <div class="container text-center">
+            <h2>Calculate Your BMI Today</h2>
+            <p class="mb-0">Track your health with our easy-to-use BMI calculator. Get instant results and personalized insights.</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-5 bg-black rounded-3 my-3">
+        <div class="container">
+            <h2 class="text-center mb-4">BMI Calculator</h2>
+
+            <form id="bmiForm" onsubmit="calculateBMI(event)" class="mt-4">
+                <!-- Weight Input -->
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Weight</label>
+                    
+                    <div class="input-group">
+                        <input type="number" id="weight" class="form-control" placeholder="Enter weight" required>
+                        
+                        <select id="weightUnit" class="form-select">
+                            <option value="kg" selected>kg</option>
+                            <option value="lbs">lbs</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Height Input -->
+                <div class="mb-3">
+                    <label for="height" class="form-label">Height</label>
+                    
+                    <div class="input-group">
+                        <input type="number" id="height" class="form-control" placeholder="Enter height" required>
+                        
+                        <select id="heightUnit" class="form-select">
+                            <option value="cm" selected>cm</option>
+                            <option value="in">in</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary w-100">Calculate BMI</button>
+            </form>
+            
+            <div id="result" class="mt-4 text-center"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Features</h2>
+            
+            <div class="row gy-3">
+                <div class="col-md-6 col-lg-4">
+                    <div class="border p-3 rounded-3 text-center">
+                        <i class="bx bx-calculator display-1 mb-3"></i>
+                        
+                        <h3>Instant Results</h3>
+                        <p class="mb-0">Get your BMI calculation immediately with detailed health insights and recommendations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="border p-3 rounded-3 text-center">
+                        <i class="bx bx-chart display-1 mb-3"></i>
+                        
+                        <h3>Accurate Measurements</h3>
+                        <p class="mb-0">Our calculator uses the standard BMI formula recommended by health professionals worldwide.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="border p-3 rounded-3 text-center">
+                        <i class="bx bx-heart display-1 mb-3"></i>
+                        
+                        <h3>Health Recommendations</h3>
+                        <p class="mb-0">Receive personalized health advice and recommendations based on your BMI results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How to Use Section -->
+    <section class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">How to Use</h2>
+            <div class="row">
+                <div class="col-12">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item bg-dark text-white">Enter your weight in kilograms</li>
+                        <li class="list-group-item bg-dark text-white">Enter your height in centimeters</li>
+                        <li class="list-group-item bg-dark text-white">Click the calculate button</li>
+                        <li class="list-group-item bg-dark text-white">View your BMI result and health category</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- category -->
+    <section class="section py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="">General BMI Categories</h2>
+                <p class="mb-0">The World Health Organization (WHO) BMI categories</p>
+            </div>
+            
+            <div class="d-grid gap-3">
+                <div class="card card-body d-flex flex-row justify-content-between text-bg-info">
+                    <p class="mb-0">Underweight</p>
+                    <p class="mb-0">under 18.5</p>
+                </div>
+                
+                <div class="card card-body d-flex flex-row justify-content-between text-bg-success">
+                    <p class="mb-0">Normal</p>
+                    <p class="mb-0">18.5 - 24.9</p>
+                </div>
+                
+                <div class="card card-body d-flex flex-row justify-content-between text-bg-warning">
+                    <p class="mb-0">Over weight</p>
+                    <p class="mb-0">25 - 29.9</p>
+                </div>
+                
+                <div class="card card-body d-flex flex-row justify-content-between text-bg-danger">
+                    <p class="mb-0">Obesity</p>
+                    <p class="mb-0">Over 30</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Section -->
+    <section id="article" class="section py-5">
+        <article class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    
+        <section>
+            <h3>What is BMI?</h3>
+            <p><strong>Body Mass Index (BMI)</strong> is a simple calculation used to assess whether an individual’s body weight falls within a healthy range. It is calculated using a person's weight and height. While BMI is widely applicable to both men and women, this article focuses on how women can use it to monitor and improve their health.</p>
+            <p>BMI is not a perfect measurement, but it is a useful tool for evaluating weight-related health risks. For women, it can provide valuable insights into their overall fitness levels and potential health issues.</p>
+        </section>
+
+        <section>
+            <h3>How is BMI Calculated?</h3>
+            <p>The formula to calculate BMI is straightforward:</p>
+            <pre>BMI = Weight (kg) / [Height (m)]²</pre>
+            <p>If you use pounds and inches, the formula becomes:</p>
+            <pre>BMI = (Weight (lbs) / [Height (in)]²) × 703</pre>
+            <p>Let’s take an example. A woman weighing 60 kilograms and standing 1.65 meters tall would have a BMI of:</p>
+            <pre>BMI = 60 / (1.65 × 1.65) = 22.03</pre>
+            <p>This value would fall within the "normal" weight range.</p>
+        </section>
+
+        <section>
+            <h3>BMI Categories</h3>
+            <p>BMI is divided into several categories to help individuals understand where they stand:</p>
+            <ul>
+                <li><strong>Underweight:</strong> BMI below 18.5</li>
+                <li><strong>Normal Weight:</strong> BMI between 18.5 and 24.9</li>
+                <li><strong>Overweight:</strong> BMI between 25.0 and 29.9</li>
+                <li><strong>Obesity:</strong> BMI of 30.0 and above</li>
+            </ul>
+            <p>For women, these ranges are crucial for identifying potential health risks related to weight.</p>
+        </section>
+
+        <section>
+            <h3>Why is BMI Important for Women?</h3>
+            <p>BMI can provide important insights for women regarding their health. Here are some reasons:</p>
+            <h4>1. Indicator of Health Risks</h4>
+            <p>Women with a BMI in the overweight or obese range are more likely to develop conditions such as:</p>
+            <ul>
+                <li>Heart disease</li>
+                <li>Type 2 diabetes</li>
+                <li>High blood pressure</li>
+                <li>Certain types of cancer</li>
+            </ul>
+            <p>Similarly, a BMI in the underweight range can signal issues such as malnutrition, osteoporosis, and reduced immunity.</p>
+            <h4>2. Monitoring Fitness Goals</h4>
+            <p>BMI can serve as a benchmark for women looking to lose, gain, or maintain weight. By tracking changes in BMI over time, women can assess whether their diet and exercise plans are effective.</p>
+            <h4>3. Pregnancy and BMI</h4>
+            <p>During pregnancy, BMI can help assess risks for complications like gestational diabetes or preeclampsia. However, it is not the sole determinant of health during this period, as factors like weight gain and nutritional intake are equally important.</p>
+        </section>
+
+        <section>
+            <h3>Limitations of BMI for Women</h3>
+            <p>While BMI is a useful tool, it has certain limitations, particularly for women:</p>
+            <ul>
+                <li><strong>Does Not Differentiate Between Fat and Muscle:</strong> Women with a high muscle mass may have a high BMI despite having a healthy body composition.</li>
+                <li><strong>Does Not Account for Body Fat Distribution:</strong> BMI does not indicate where fat is distributed on the body, which is important because abdominal fat carries higher health risks than fat stored in other areas.</li>
+                <li><strong>Not Tailored for Pregnant or Breastfeeding Women:</strong> BMI calculations do not account for the natural weight changes during pregnancy and breastfeeding.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>How to Use a BMI Calculator for Women</h3>
+            <p>Using a BMI calculator is simple:</p>
+            <ol>
+                <li>Input your weight in kilograms or pounds.</li>
+                <li>Enter your height in meters or inches.</li>
+                <li>Click "Calculate" to see your BMI and corresponding category.</li>
+            </ol>
+            <p>Many online BMI calculators are available for free, and some apps offer additional features like tracking progress over time or providing personalized health advice.</p>
+        </section>
+
+        <section>
+            <h3>Tips for Maintaining a Healthy BMI</h3>
+            <p>Here are some tips for women to maintain a healthy BMI:</p>
+            <h4>1. Adopt a Balanced Diet</h4>
+            <p>Include a variety of nutrients in your diet, such as:</p>
+            <ul>
+                <li>Fruits and vegetables</li>
+                <li>Whole grains</li>
+                <li>Lean proteins</li>
+                <li>Healthy fats</li>
+            </ul>
+            <h4>2. Engage in Regular Physical Activity</h4>
+            <p>Aim for at least 150 minutes of moderate aerobic activity or 75 minutes of vigorous exercise weekly, along with strength training.</p>
+            <h4>3. Monitor Your Weight Regularly</h4>
+            <p>Track changes in your weight and BMI to ensure you remain within a healthy range.</p>
+            <h4>4. Consult a Healthcare Professional</h4>
+            <p>Speak to a doctor or nutritionist if you need guidance on achieving a healthy BMI.</p>
+        </section>
+
+        <section>
+            <h3>When BMI May Not Be Enough</h3>
+            <p>For a more accurate assessment of health, women can complement BMI with other measurements, such as:</p>
+            <ul>
+                <li><strong>Waist-to-Hip Ratio (WHR):</strong> Measures fat distribution.</li>
+                <li><strong>Body Fat Percentage:</strong> Indicates the proportion of fat in the body.</li>
+                <li><strong>Blood Pressure and Cholesterol Levels:</strong> Provide insight into overall cardiovascular health.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Final Thoughts</h3>
+            <p>A BMI calculator is a simple yet effective tool for women to monitor their health and weight. While it has limitations, understanding your BMI can be a starting point for making healthier lifestyle choices.</p>
+            <p>Remember, BMI is just one aspect of health. Focusing on overall well-being, including diet, exercise, and mental health, is equally important.</p>
+        </section>
+
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            What is a healthy BMI range?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            A healthy BMI range is typically between 18.5 and 24.9.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How often should I check my BMI?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            It's recommended to check your BMI every 3-6 months or when there are significant changes in your weight.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            How to calculate BMI women?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                        Calculating BMI for women involves the same steps as for men. Use your weight and height in the formula above, and you’ll determine your BMI. This value will help you understand whether you are underweight, normal weight, overweight, or obese.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Is BMI calculated differently for men and women?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            No, BMI is calculated using the same formula for both men and women. However, BMI does not consider differences in body composition, such as muscle mass or fat distribution, which may vary between men and women. Women typically have higher body fat percentages than men, so additional health metrics may be used alongside BMI for more accuracy.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            Can BMI be used during pregnancy?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            BMI is not a reliable measurement during pregnancy, as weight gain is a natural and necessary part of the process. Instead, focus on your doctor’s guidelines for healthy weight gain and nutrition during this time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="py-5 bg-black mt-3">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-lg-4">
+                    <h5 class="mb-3">BMI Calculator</h5>
+                    <p class="text-muted mb-3">Your trusted tool for calculating and tracking Body Mass Index. Get accurate measurements and health insights instantly.</p>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="#calculator" class="text-muted text-decoration-none">Calculator</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#features" class="text-muted text-decoration-none">Features</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#article" class="text-muted text-decoration-none">Articles</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#faq" class="text-muted text-decoration-none">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Legal Links -->
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-3">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/p/privacy.html" class="text-muted text-decoration-none">Privacy Policy</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/p/terms.html" class="text-muted text-decoration-none">Terms of Service</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-3">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 text-muted">
+                            <i class="bx bx-envelope me-2"></i> support@bmicalculator.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Divider -->
+            <hr class="my-4 border-secondary">
+    
+            <!-- Bottom Footer -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-3 mb-md-0 text-muted">
+                        © 2025 BMI Calculator. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline text-center text-md-end mb-0">
+                        <li class="list-inline-item ms-3">
+                            <a href="/" class="text-muted small text-decoration-none">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Google Required Links -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p class="text-muted small text-center">
+                        This site uses cookies to improve your experience. By continuing to browse the site, you are agreeing to our use of cookies. 
+                        <a href="/p/privacy.html" class="text-primary text-decoration-none">Learn more</a>
+                    </p>
+                </div>
+                <!-- Google Analytics Compliance -->
+                <div class="col-12 text-center">
+                    <p class="text-muted small mb-0">
+                        This website uses Google Analytics to collect anonymous information such as the number of visitors to the site, and the most popular pages. 
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-primary text-decoration-none">Google Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/scroll.js"></script>
+    <script>
+        new BackToTop(200);
+        
+        (() => {
+            const weight = document.getElementById('weight');
+            const height = document.getElementById('height');
+            
+            const query = new URLSearchParams(location.search);
+
+            if(query.get('height')) {
+                height.value = parseInt(query.get('height'));
+            }
+            
+            if(query.get('weight')) {
+                weight.value = parseInt(query.get('weight'));
+            }
+        })();
+        
+        function calculateBMI(e) {
+            e.preventDefault();
+            
+            const weight = parseFloat(document.getElementById('weight').value);
+            const weightUnit = document.getElementById('weightUnit').value;
+            const height = parseFloat(document.getElementById('height').value);
+            const heightUnit = document.getElementById('heightUnit').value;
+
+      let weightInKg, heightInMeters, bmi;
+
+      // Convert weight to kg if needed
+      if (weightUnit === "kg") {
+        weightInKg = weight;
+      } else {
+        weightInKg = weight * 0.453592; // Convert lbs to kg
+      }
+
+      // Convert height to meters if needed
+      if (heightUnit === "cm") {
+        heightInMeters = height / 100;
+      } else {
+        heightInMeters = height * 0.0254; // Convert inches to meters
+      }
+
+      // Calculate BMI
+      bmi = weightInKg / (heightInMeters * heightInMeters);
+      bmi = bmi.toFixed(1); // Round to one decimal place
+
+      displayResult(bmi);
+    }
+
+    function displayResult(bmi) {
+        let category = '';
+        
+        if (bmi < 18.5) {
+            category = `Underweight (BMI < 18.5)`;
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            category = `Normal weight (BMI 18.5 - 24.9)`;
+        } else if (bmi >= 25 && bmi < 29.9) {
+            category = `Overweight (BMI 25 - 29.9)`;
+        } else {
+            category = `Obese (BMI ≥ 30)`;
+        }
+
+        document.getElementById('result').innerHTML = `
+            <h3>Your BMI: ${bmi}</h3>
+            <p class="text-${category.includes('Normal') ? 'success' : category.includes('Underweight') ? 'warning' : 'danger'}">${category}</p>
+        `;
+    }
+    </script>
+</body>
+</html>
